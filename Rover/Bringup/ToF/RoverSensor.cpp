@@ -16,6 +16,7 @@ void initializeSensor()
     if (!sensor.begin())
     {
         Serial.println("Sensor failed!");
+        Serial.println("Check VIN, GND, SDA on GP0, SCL on GP1, and 3.3 V I2C pull-ups.");
         while (1);
     }
 

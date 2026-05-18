@@ -10,6 +10,7 @@ from serial.tools import list_ports
 
 GRID_SIZE = 8
 FRAME_MARKER = "Distance Grid (mm):"
+PICO_PORT_KEYWORDS = ("pico", "rp2040", "raspberry pi")
 
 
 def find_serial_port() -> Optional[str]:
@@ -17,6 +18,18 @@ def find_serial_port() -> Optional[str]:
 
     if len(ports) == 1:
         return ports[0].device
+
+    pico_ports = [
+        port
+        for port in ports
+        if any(
+            keyword in f"{port.description} {port.manufacturer}".lower()
+            for keyword in PICO_PORT_KEYWORDS
+        )
+    ]
+
+    if len(pico_ports) == 1:
+        return pico_ports[0].device
 
     return None
 
@@ -90,11 +103,18 @@ def main() -> int:
 
     if port is None:
         print("Could not choose a serial port automatically.")
-        print("Run with --port COMx, for example: python serial_heatmap.py --port COM3")
+        print("Run with --port COMx, for example: python run_heatmap.py --port COM3")
         print()
         print("Detected ports:")
-        for detected_port in list_ports.comports():
-            print(f"  {detected_port.device}: {detected_port.description}")
+        detected_ports = list(list_ports.comports())
+        if not detected_ports:
+            print("  None")
+        for detected_port in detected_ports:
+            print(
+                f"  {detected_port.device}: "
+                f"{detected_port.description} "
+                f"({detected_port.manufacturer or 'unknown manufacturer'})"
+            )
         return 1
 
     try:
