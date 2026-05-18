@@ -26,7 +26,7 @@ Rover/
       main_ToF.cpp
       RoverSensor.cpp
       RoverSensor.h
-      ToF_Bringup_Guide.md
+      README.md
       serial_heatmap.py
       run_heatmap.py
       run_heatmap.bat
@@ -54,7 +54,7 @@ The bring-up firmware lives under `Bringup/`, with separate PlatformIO environme
 - I2C connection on Pico `GP0` / `GP1`
 - USB serial monitor at `115200` baud
 
-For wiring, setup, and heat map usage, see [Bringup/ToF/ToF_Bringup_Guide.md](Bringup/ToF/ToF_Bringup_Guide.md).
+For wiring, setup, and heat map usage, see [Bringup/ToF/README.md](Bringup/ToF/README.md).
 
 Build and upload the ToF firmware with:
 
