@@ -125,6 +125,16 @@ run_heatmap.py
 live heat map
 ```
 
+## Example Output
+
+The firmware prints each VL53L5CX frame as an 8x8 distance grid in the serial monitor:
+
+![8x8 distance grid in the serial monitor](images/8x8_grid.png)
+
+The Python heat map script reads that same serial output and displays it as a live distance heat map:
+
+![VL53L5CX distance heat map from the Python viewer](images/heat_map.png)
+
 ## Full Timeline
 
 1. Place the Pico and VL53L5CX sensor on the bench with power disconnected.

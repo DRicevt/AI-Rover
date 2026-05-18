@@ -24,3 +24,9 @@ Use a pull-up resistor from DATA to 3V3 if your DHT11 breakout board does not al
 pio run -e pico_dht11 -t upload
 pio device monitor -b 115200
 ```
+
+## Example Output
+
+The firmware sends each DHT11 reading over USB serial so it can be viewed in the serial monitor:
+
+![DHT11 serial monitor output](images/dht11_output.png)
