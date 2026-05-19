@@ -11,3 +11,26 @@ __pycache__/
 *.log
 .DS_Store
 Thumbs.db
+
+# KiCad generated/local files
+*-backups/
+*.bak
+*.bck
+*.kicad_prl
+*.kicad_pro-bak
+*.kicad_sch-bak
+*.kicad_pcb-bak
+*.sch-bak
+*.pcb-bak
+fp-info-cache
+*.net
+*.xml
+*.csv
+*.pos
+*.drl
+*.gbr
+*.gbrjob
+*.rpt
+*.step
+*.stp
+*.wrl

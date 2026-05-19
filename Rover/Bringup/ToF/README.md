@@ -10,8 +10,8 @@ This setup powers the sensor from the Pico 5 V output and keeps the I2C bus pull
 | --- | --- | --- |
 | 5 V power | VBUS / 5 V output, physical pin 40 | Sensor VIN |
 | Ground | Any Pico GND | Sensor GND |
-| I2C SDA | GP0, physical pin 1 | Sensor SDA |
-| I2C SCL | GP1, physical pin 2 | Sensor SCL |
+| I2C SDA | GP4, physical pin 6 | Sensor SDA |
+| I2C SCL | GP5, physical pin 7 | Sensor SCL |
 | SDA pull-up | 3V3 rail | 4.7 kOhm resistor from SDA to 3V3 |
 | SCL pull-up | 3V3 rail | 4.7 kOhm resistor from SCL to 3V3 |
 
@@ -22,8 +22,8 @@ Raspberry Pi Pico                         VL53L5CX Sensor
 -----------------                         ----------------
 VBUS / 5V  pin 40  ---------------------> VIN
 GND        any GND ---------------------> GND
-GP0 / SDA  pin 1   ---------------------> SDA
-GP1 / SCL  pin 2   ---------------------> SCL
+GP4 / SDA  pin 6   ---------------------> SDA
+GP5 / SCL  pin 7   ---------------------> SCL
 
 3V3 rail  -------- 4.7 kOhm resistor ----> SDA line
 3V3 rail  -------- 4.7 kOhm resistor ----> SCL line
@@ -143,9 +143,9 @@ The Python heat map script reads that same serial output and displays it as a li
 
 3. Connect a Pico GND pin to the sensor GND pin.
 
-4. Connect Pico GP0, physical pin 1, to sensor SDA.
+4. Connect Pico GP4, physical pin 6, to sensor SDA.
 
-5. Connect Pico GP1, physical pin 2, to sensor SCL.
+5. Connect Pico GP5, physical pin 7, to sensor SCL.
 
 6. Add a 4.7 kOhm pull-up resistor from the SDA line to the Pico 3V3 rail.
 
@@ -199,8 +199,8 @@ If the sensor prints `Sensor failed!`, check wiring in this order:
 
 1. VIN is connected to Pico 5 V / VBUS.
 2. GND is shared between Pico and sensor.
-3. SDA is on GP0.
-4. SCL is on GP1.
+3. SDA is on GP4.
+4. SCL is on GP5.
 5. SDA has a 4.7 kOhm pull-up to 3.3 V.
 6. SCL has a 4.7 kOhm pull-up to 3.3 V.
 
