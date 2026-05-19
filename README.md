@@ -1,6 +1,12 @@
-# AI Rover
+# ROAMER
 
-AI Rover is a proof-of-concept physical AI rover for real-world autonomy research. The platform is being designed around a Jetson Orin Nano 8GB, camera, and time-of-flight sensing so it can perceive and navigate unknown terrain while keeping compute on the vehicle.
+**Robotic Onboard Autonomy for Mission Execution and Reasoning**
+
+ROAMER is a proof-of-concept physical AI rover for real-world autonomy research and a small-scale "Mars-like" rover design study. This repository represents the early prototype phase of the system, focused on proving out the hardware, sensing, controls, and onboard autonomy architecture before it becomes a fully integrated rover platform.
+
+The project explores how a rover could operate in unknown terrain with limited outside assistance, making useful local decisions without relying on frequent mission-control interruptions or continuous human supervision. The long-term concept is an exploration rover that can interpret goals, reason over sensor data, and adapt its behavior locally when communication delays or mission constraints make constant Earth-based command impractical.
+
+The platform is being designed around a Jetson Orin Nano 8GB, camera, and time-of-flight sensing so it can perceive and navigate unfamiliar terrain while keeping compute on the vehicle.
 
 The long-term control stack pairs a local LLM for high-level reasoning with conventional deterministic computing for low-level control. As the platform matures, reinforcement learning is planned for low-level decision making so the rover can improve local motion behavior, obstacle response, and terrain handling through simulation and physical testing.
 
@@ -183,4 +189,4 @@ pio device monitor -b 115200
 Devon Rice  
 ricedevon3@gmail.com \
 B.S. Aerospace Engineering Virginia Tech '26 \
-M.S. Aerispace Engineering Virginia Tech '27
+M.S. Aerospace Engineering Virginia Tech '27
