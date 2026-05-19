@@ -16,10 +16,13 @@ Thumbs.db
 *-backups/
 *.bak
 *.bck
+*.lck
 *.kicad_prl
 *.kicad_pro-bak
 *.kicad_sch-bak
 *.kicad_pcb-bak
+*-cache.lib
+*.000
 *.sch-bak
 *.pcb-bak
 fp-info-cache
