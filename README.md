@@ -29,14 +29,17 @@ The repository is currently in the subsystem bring-up phase. Each hardware block
 | --- | --- | --- |
 | VL53L5CX ToF sensor | Raspberry Pi Pico firmware reads an 8x8 distance grid over I2C and streams frames over USB serial. A Python tool renders the data as a live heat map. | [ToF bring-up guide](Rover/Bringup/ToF/README.md) |
 | DHT11 environmental sensor | Raspberry Pi Pico firmware reads temperature and humidity and prints values over USB serial. | [DHT11 bring-up guide](Rover/Bringup/DHT11/README.md) |
+| TMC2209 stepper driver | Raspberry Pi Pico firmware drives a NEMA 17 motor through a TMC2209 module in STEP/DIR mode. The main schematic now includes four SilentStepStick-style driver channels for rover drivetrain integration. | [TMC2209 bring-up guide](Rover/Bringup/TMC2209/README.md) |
 | Embedded firmware | PlatformIO project with separate environments for each bring-up target. | [Rover firmware](Rover/README.md) |
-| Electrical design | KiCad project for the main rover electronics. | [KiCad/Rover_main](KiCad/Rover_main) |
+| Electrical design | KiCad project for the main rover electronics, including Pico/XIAO controller blocks, ToF/DHT headers, four TMC2209 driver channels, motor connectors, debug LEDs, battery sensing, and 12 V regulation. | [KiCad/Rover_main](KiCad/Rover_main) |
 | Mechanical design | Fusion 360 rover CAD model planned for printable chassis, mounts, and electronics packaging. | Image/link pending |
 | System integration | Integration will begin after the individual bring-up targets are tested and documented. | Planned |
 
 ## System Architecture
 
 The rover is being built as a layered system so each responsibility has a clear boundary:
+
+![ROAMER system architecture](docs/images/System_Architecture.png)
 
 | Layer | Responsibility | Planned Components |
 | --- | --- | --- |
@@ -62,8 +65,6 @@ Low-level control firmware
         v
 Motors, sensors, power, and mechanical rover body
 ```
-
-> Figure needed: overall rover system architecture diagram.
 
 ## Bring-Up First Engineering Approach
 
@@ -98,6 +99,12 @@ The DHT11 bring-up verifies a simple environmental sensor path using Pico firmwa
 
 Guide: [Rover/Bringup/DHT11/README.md](Rover/Bringup/DHT11/README.md)
 
+### TMC2209 Stepper Driver
+
+The TMC2209 bring-up verifies a NEMA 17 stepper motor path with simple Pico firmware using `STEP`, `DIR`, and active-low `EN` control. This provides a repeatable bench test for the drivetrain driver hardware before rover-level motion control is integrated.
+
+Guide: [Rover/Bringup/TMC2209/README.md](Rover/Bringup/TMC2209/README.md)
+
 ## Mechanical Design
 
 A full 3D CAD model will be developed in Fusion 360. The mechanical design should become the manufacturing source for:
@@ -114,9 +121,22 @@ A full 3D CAD model will be developed in Fusion 360. The mechanical design shoul
 
 ## Electrical Design
 
-Electrical design work is tracked under the KiCad project in [KiCad/Rover_main](KiCad/Rover_main). As the design matures, this section should include the main schematic, PCB renders, power tree, connector map, and wiring harness notes.
+Electrical design work is tracked under the KiCad project in [KiCad/Rover_main](KiCad/Rover_main). The current main schematic captures the controller, sensor, motor-driver, power, and debug circuitry needed for the next integration pass.
 
-> Figures needed: electrical block diagram, PCB render, power distribution diagram.
+![ROAMER main electronics schematic](KiCad/Rover_main/Rover_main.svg)
+
+Current schematic blocks:
+
+- Raspberry Pi Pico L and Pico R controller blocks with separate power LEDs.
+- XIAO ESP32-S3 block for additional embedded connectivity and expansion.
+- VL53L5CX ToF sensor header and DHT11 temperature/humidity sensor header.
+- Four TMC2209 SilentStepStick-style driver modules with `STEP`, `DIR`, active-low `EN`, and paired UART nets.
+- Four JST-XH motor connectors with labeled black, green, blue, and red coil wiring.
+- Per-driver 470 uF motor-supply bulk capacitors and local 3.3 V decoupling capacitors.
+- Battery voltage sensing divider with ADC filtering.
+- 12 V regulator interface, battery input terminals, debug LEDs, and power/status LEDs.
+
+Figures still needed: electrical block diagram, PCB render, power distribution diagram.
 
 ## Bill of Materials
 
@@ -139,6 +159,7 @@ AI-Rover/
     Bringup/
       ToF/                   VL53L5CX firmware, serial parser, heat map viewer
       DHT11/                 DHT11 firmware and documentation
+      TMC2209/               Stepper driver firmware and documentation
     include/
     lib/
     test/
@@ -170,6 +191,14 @@ Build and upload the DHT11 bring-up firmware:
 ```powershell
 cd Rover
 pio run -e pico_dht11 -t upload
+pio device monitor -b 115200
+```
+
+Build and upload the TMC2209 stepper bring-up firmware:
+
+```powershell
+cd Rover
+pio run -e pico_tmc2209 -t upload
 pio device monitor -b 115200
 ```
 

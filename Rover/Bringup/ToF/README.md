@@ -215,3 +215,10 @@ If Python says the COM port access is denied:
 If `pio` is not recognized, use the full PlatformIO path shown in the build and upload commands above.
 
 If PowerShell blocks virtual environment activation, skip activation and run through `.venv\Scripts\python.exe` directly, as shown in the timeline.
+
+## Author
+
+Devon Rice  
+ricedevon3@gmail.com \
+B.S. Aerospace Engineering Virginia Tech '26 \
+M.S. Aerospace Engineering Virginia Tech '27

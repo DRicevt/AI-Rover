@@ -30,3 +30,10 @@ pio device monitor -b 115200
 The firmware sends each DHT11 reading over USB serial so it can be viewed in the serial monitor:
 
 ![DHT11 serial monitor output](images/dht11_output.png)
+
+## Author
+
+Devon Rice  
+ricedevon3@gmail.com \
+B.S. Aerospace Engineering Virginia Tech '26 \
+M.S. Aerospace Engineering Virginia Tech '27
